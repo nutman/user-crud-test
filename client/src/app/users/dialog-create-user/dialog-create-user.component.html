@@ -1,0 +1,32 @@
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)" #form="ngForm">
+  <h3>Create User</h3>
+  <mat-dialog-content class="app-form">
+
+
+    <mat-form-field>
+      <input matInput
+             formControlName="email"
+             placeholder="Email"
+             required>
+<!--      <mat-error *ngIf="email.errors?.required">Email is required</mat-error>-->
+<!--      <mat-error *ngIf="email.errors?.email">Email is incorrect</mat-error>-->
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="First Name" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="surname" placeholder="Last Name" required>
+    </mat-form-field>
+
+  </mat-dialog-content>
+
+<!--  <mat-error *ngIf="(error$ | async)">{{error$ | async}}</mat-error>-->
+
+  <mat-dialog-actions align="end">
+    <button mat-raised-button class="app-button mat-primary" [disabled]="checkoutForm.invalid" type="submit">Create
+    </button>
+    <button mat-button class="app-button" (click)="closeDialog()" type="button">Cancel</button>
+  </mat-dialog-actions>
+</form>
