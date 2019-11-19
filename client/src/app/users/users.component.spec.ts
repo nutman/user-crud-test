@@ -1,8 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UsersComponent} from './users.component';
-import {DialogCreateUserComponent} from './dialog-create-user/dialog-create-user.component';
-import {DialogRemoveUserComponent} from './dialog-remove-user/dialog-remove-user.component';
 import {MatTableModule} from '@angular/material/table';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -11,6 +9,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {Actions} from '@ngrx/effects';
+import {StoreModule} from '@ngrx/store';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {userReducer} from '@store/user/user.reducer';
 
 describe('UsersComponent', () => {
   let component: UsersComponent;
@@ -18,12 +21,6 @@ describe('UsersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        UsersComponent,
-        DialogCreateUserComponent,
-        DialogRemoveUserComponent
-
-      ],
       imports: [
         MatTableModule,
         ReactiveFormsModule,
@@ -32,7 +29,18 @@ describe('UsersComponent', () => {
         MatButtonModule,
         MatInputModule,
         MatIconModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('user', userReducer),
+        HttpClientModule,
+        BrowserAnimationsModule,
+      ],
+
+      providers: [Actions],
+
+      declarations: [
+        UsersComponent,
       ]
     })
       .compileComponents();
